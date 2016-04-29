@@ -14,7 +14,7 @@ var model = {
 
 var api = {
   root: "https://api.themoviedb.org/3",
-  token: "8e888fa39ec243e662e1fb738c42ae99" // TODO 0 add your api key
+  token: "60f47effe64bc8f896debedd3c546a64" // TODO 0 add your api key
 }
 
 
@@ -32,6 +32,7 @@ function discoverMovies(callback) {
     success: function(response) {
       model.browseItems = response.results;
       callback(response);
+      console.log(response);
     }
   });
 }
@@ -62,7 +63,7 @@ function render() {
   // insert watchlist items
   model.watchlistItems.forEach(function(movie) {
     var title = $("<p></p>").text(movie.original_title);
-    var itemView = $("<li></li>")
+    var itemView = $("<li class=item-watchlist></li>")
       .append(title)
       // TODO 3
       // give itemView a class attribute of "item-watchlist"
@@ -73,28 +74,39 @@ function render() {
   // insert browse items
   model.browseItems.forEach(function(movie) {
     var title = $("<h4></h4>").text(movie.original_title);
+    var overview = $("<p></p>").text(movie.overview);
     var button = $("<button></button>")
       .text("Add to Watchlist")
       .click(function() {
         model.watchlistItems.push(movie);
+        
+        var a = model.watchlistItems.indexOf(movie);
+        console.log(a);
+        if (a > -1){
+          button.prop("disabled", true);
+        };
+        
+        
         render();
       });
-      // TODO 2
+      // TODO 2 (DONE?)
       // the button should be disabled if this movie is already in
       // the user's watchlist
       // see jQuery .prop() and Array.indexOf()
 
 
-    // TODO 1
+    // TODO 1 (DONE)
     // create a paragraph containing the movie object's .overview value
     // then, in the code block below,
     // append the paragraph in between the title and the button
+    
 
 
     // append everything to itemView, along with an <hr/>
     var itemView = $("<li></li>")
       .append($("<hr/>"))
       .append(title)
+      .append(overview)
       .append(button);
 
     // append the itemView to the list
