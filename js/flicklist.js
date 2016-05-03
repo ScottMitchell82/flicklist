@@ -31,7 +31,7 @@ function discoverMovies(callback) {
     },
     success: function(response) {
       model.browseItems = response.results;
-      callback(response);
+      callback();
       console.log(response);
     }
   });
@@ -45,9 +45,21 @@ function discoverMovies(callback) {
  * if successful, updates model.browseItems appropriately and then invokes
  * the callback function that was passed in
  */
-function searchMovies(query, callback) {
-  // TODO 8
-
+function searchMovies(searchTerm, callback) {
+  $.ajax({
+    url: api.root + "/search/movie",
+    data: {
+      api_key: api.token,
+      query: query
+    },
+    success: function(response) {
+      model.browseItems = response.results;
+      callback(response);
+    },
+    fail: function() {
+      console.log("search failed");
+    }
+  });
 }
 
 
@@ -79,16 +91,10 @@ function render() {
       .text("Add to Watchlist")
       .click(function() {
         model.watchlistItems.push(movie);
-        
-        var a = model.watchlistItems.indexOf(movie);
-        console.log(a);
-        if (a > -1){
-          button.prop("disabled", true);
-        };
-        
-        
         render();
-      });
+      })
+      .prop("disabled", model.watchlistItems.indexOf(movie) !== -1);
+      
       // TODO 2 (DONE?)
       // the button should be disabled if this movie is already in
       // the user's watchlist

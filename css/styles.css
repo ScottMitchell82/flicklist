@@ -15,7 +15,8 @@ and then style them as shown in the example (padding, margin, background, etc)
 .item-watchlist {
 	display: inline-block;
 	padding: 25px;
-	margin: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
 	background-color: orange;
 	color: white;
 }
@@ -60,10 +61,9 @@ ul {
 
 button, input[type="submit"] {
 	border-width: 0px;
-	/*
-	TODO 9
-	give these buttons some padding, and color them orange with white text
-	*/
+	background-color: orange;
+	padding: 10px;
+	color: white;
 }
 
 button:disabled {
