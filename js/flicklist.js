@@ -7,13 +7,8 @@ var model = {
 
 
 var api = {
-
   root: "https://api.themoviedb.org/3",
-  token: "60f47effe64bc8f896debedd3c546a64", // TODO 0 add your api key
-
-  /**
-   * Given a movie object, returns the url to its poster image
-   */
+  token: "60f47effe64bc8f896debedd3c546a64",
   posterUrl: function(movie) {
     // TODO 4b
     // implement this function
@@ -23,7 +18,6 @@ var api = {
     //return "http://images5.fanpop.com/image/photos/25100000/movie-poster-rapunzel-and-eugene-25184488-300-450.jpg"; 
   }
 };
-
 
 /**
  * Makes an AJAX request to themoviedb.org, asking for some movies
@@ -102,6 +96,8 @@ function render() {
     var poster = $("<img></img>").attr("src", api.posterUrl(movie))
     .attr("class", "img-responsive");
     
+    console.log(api.posterUrl(movie));
+    
     var panelBody = $("<div></div>")
     .attr("class", "panel-body")
     .append(poster)
@@ -121,11 +117,13 @@ function render() {
     // re-implement the li as a bootstrap panel with a heading and a body
     var itemView = $("<li></li>")
       .append(title)
+      .append(panelBody)
       .append(button)
       .attr("class", "panel panel-default");
 
     $("#section-watchlist ul").append(itemView);
   });
+  
 
   // insert browse items
   model.browseItems.forEach(function(movie) {
