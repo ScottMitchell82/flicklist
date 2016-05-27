@@ -46,3 +46,19 @@ section {
 	padding: 2%;
 }
 
+#browse-carousel {
+    max-width: 300px;
+    margin: auto;
+}
+
+.well {
+	background: red;
+	color: white;
+	border-width: 0px;
+	
+}
+
+.carousel-inner {
+	padding-left: 0px;
+}
+
